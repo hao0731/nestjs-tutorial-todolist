@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { GLOBAL_VALIDATION_PIPE } from './common/providers';
 import databaseConfig from './configs/database.config';
 import secretConfig from './configs/secret.config';
 
@@ -21,6 +22,6 @@ import secretConfig from './configs/secret.config';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GLOBAL_VALIDATION_PIPE],
 })
 export class AppModule {}
