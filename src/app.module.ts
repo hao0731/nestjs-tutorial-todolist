@@ -1,11 +1,17 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { GLOBAL_VALIDATION_PIPE } from './common/providers';
+
+import {
+  GLOBAL_RESPONSE_INTERCEPTOR,
+  GLOBAL_VALIDATION_PIPE,
+} from './common/providers';
+
 import databaseConfig from './configs/database.config';
 import secretConfig from './configs/secret.config';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -22,6 +28,6 @@ import secretConfig from './configs/secret.config';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, GLOBAL_VALIDATION_PIPE],
+  providers: [AppService, GLOBAL_VALIDATION_PIPE, GLOBAL_RESPONSE_INTERCEPTOR],
 })
 export class AppModule {}
