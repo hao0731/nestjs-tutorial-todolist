@@ -1,0 +1,2 @@
+export const USER_USERNAME_MIN_LENGTH = 3;
+export const USER_USERNAME_MAX_LENGTH = 20;
