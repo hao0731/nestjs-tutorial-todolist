@@ -9,6 +9,7 @@ import {
 
 import databaseConfig from './configs/database.config';
 import secretConfig from './configs/secret.config';
+import adminConfig from './configs/admin.config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -17,7 +18,7 @@ import { AppService } from './app.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [databaseConfig, secretConfig],
+      load: [databaseConfig, secretConfig, adminConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
