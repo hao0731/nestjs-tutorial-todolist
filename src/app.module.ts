@@ -13,6 +13,7 @@ import adminConfig from './configs/admin.config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UserModule } from './features/user/user.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AppService } from './app.service';
         uri: configService.get<string>('database.uri'),
       }),
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, GLOBAL_VALIDATION_PIPE, GLOBAL_RESPONSE_INTERCEPTOR],
