@@ -2,7 +2,7 @@ import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
 
-import { Model } from 'mongoose';
+import { Model, FilterQuery } from 'mongoose';
 
 import * as bcrypt from 'bcrypt';
 
@@ -25,6 +25,10 @@ export class UserService implements OnApplicationBootstrap {
     const { password } = dto;
     const hash = await bcrypt.hash(password, 12);
     return this.userModel.create({ ...dto, password: hash });
+  }
+
+  public async getUser(filters: FilterQuery<UserDocument>) {
+    return this.userModel.findOne(filters).exec();
   }
 
   private async createDefaultAdmin() {
