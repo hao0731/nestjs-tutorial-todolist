@@ -15,6 +15,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
+import { AuthorizationModule } from './common/modules/authorization/authorization.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { AuthModule } from './features/auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    AuthorizationModule,
   ],
   controllers: [AppController],
   providers: [AppService, GLOBAL_VALIDATION_PIPE, GLOBAL_RESPONSE_INTERCEPTOR],
