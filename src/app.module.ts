@@ -6,6 +6,7 @@ import {
   GLOBAL_RESPONSE_INTERCEPTOR,
   GLOBAL_VALIDATION_PIPE,
 } from './common/providers';
+import { AuthorizationModule } from './common/modules/authorization';
 
 import databaseConfig from './configs/database.config';
 import secretConfig from './configs/secret.config';
@@ -15,7 +16,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
-import { AuthorizationModule } from './common/modules/authorization/authorization.module';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -30,9 +31,13 @@ import { AuthorizationModule } from './common/modules/authorization/authorizatio
         uri: configService.get<string>('database.uri'),
       }),
     }),
+    AuthorizationModule.register({
+      global: true,
+      modelPath: join(__dirname, '../casbin/model.conf'),
+      policyAdapter: join(__dirname, '../casbin/policy.csv'),
+    }),
     UserModule,
     AuthModule,
-    AuthorizationModule,
   ],
   controllers: [AppController],
   providers: [AppService, GLOBAL_VALIDATION_PIPE, GLOBAL_RESPONSE_INTERCEPTOR],
