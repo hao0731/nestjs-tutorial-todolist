@@ -17,6 +17,7 @@ import { AppService } from './app.service';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
 import { join } from 'path';
+import { TodoModule } from './features/todo/todo.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { join } from 'path';
     }),
     UserModule,
     AuthModule,
+    TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService, GLOBAL_VALIDATION_PIPE, GLOBAL_RESPONSE_INTERCEPTOR],
