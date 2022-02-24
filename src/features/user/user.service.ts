@@ -27,8 +27,21 @@ export class UserService implements OnApplicationBootstrap {
     return this.userModel.create({ ...dto, password: hash });
   }
 
+  public getUsers(skip = 0, limit = 30, filters?: FilterQuery<UserDocument>) {
+    const query = this.userModel.find(filters).skip(skip).limit(limit);
+    return query.exec();
+  }
+
   public async getUser(filters: FilterQuery<UserDocument>) {
     return this.userModel.findOne(filters).exec();
+  }
+
+  public removeUser(id: string) {
+    return this.userModel.findByIdAndDelete(id).exec();
+  }
+
+  public existUser(username: string, email: string) {
+    return this.userModel.exists({ $or: [{ username }, { email }] }).exec();
   }
 
   private async createDefaultAdmin() {
